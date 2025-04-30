@@ -28,7 +28,7 @@ public class CreateTable {
                 "ControlDeCargaYLogistica",
                 "UsuariosDelSistema",
                 "Empleados",
-                "Equipaje"
+                "Equipajes"
         );
         for (String tabla : tablas) {
             crearTabla(tabla);
@@ -131,7 +131,7 @@ public class CreateTable {
                     "    CONSTRAINT CHK_RolUsuario CHECK (Rol IN ('Administrador', 'Aerolínea','Cliente'))\n" +
                     ")";
 
-            case "Equipaje" ->"CREATE TABLE Equipaje (\n" +
+            case "Equipajes" ->"CREATE TABLE Equipajes (\n" +
                     "    ID_Maleta INT PRIMARY KEY IDENTITY(1,1),\n" +
                     "    CodigoDeBarras NVARCHAR(50) NOT NULL UNIQUE,\n" +
                     "    Peso DECIMAL(10,2) CHECK (Peso > 0),\n" +
