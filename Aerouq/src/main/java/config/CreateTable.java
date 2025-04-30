@@ -27,6 +27,7 @@ public class CreateTable {
                 "MantenimientoAeronaves",
                 "ControlDeCargaYLogistica",
                 "UsuariosDelSistema",
+                "Cargos",
                 "Empleados",
                 "Equipajes"
         );
@@ -103,8 +104,9 @@ public class CreateTable {
             case "Empleados" ->"CREATE TABLE Empleados (\n" +
                     "    ID_Empleado INT PRIMARY KEY IDENTITY(1,1),\n" +
                     "    Nombre NVARCHAR(100) NOT NULL,\n" +
-                    "    Cargo NVARCHAR(50) NOT NULL,\n" +
-                    "    CONSTRAINT CHK_CargoEmpleado CHECK (Cargo IN ('Controlador aéreo', 'Seguridad', 'Personal de Tierra'))\n" +
+                    "    Apellido NVARCHAR(100) NOT NULL,\n" +
+                    "    idCargo INT NOT NULL,\n" +
+                    "    CONSTRAINT FK_Empleado_Cargo FOREIGN KEY (idCargo) REFERENCES Cargo(idCargo)\n" +
                     ")";
 
             case "ControlDeCargaYLogistica" ->"CREATE TABLE ControlDeCargaYLogistica (\n" +
@@ -144,6 +146,12 @@ public class CreateTable {
                     "        REFERENCES Pasajeros(ID_Pasajero),\n" +
                     "    CONSTRAINT CHK_EstadoEquipaje CHECK (Estado IN ('En tránsito', 'Cargada', 'Extraviada'))\n" +
                     ")";
+            case "Cargos" -> "CREATE TABLE Cargos (\n" +
+                    "    idCargo INT PRIMARY KEY AUTO_INCREMENT,\n" +
+                    "    nombreCargo VARCHAR(100) NOT NULL,\n" +
+                    "    descripcion VARCHAR(255),\n" +
+                    "    fechaCreacion DATE NOT NULL\n" +
+                    ");\n";
 
             default -> throw new SQLException("No hay una estructura definida para la tabla " + tabla);
         };
